@@ -1,0 +1,51 @@
+{
+  "name": "n8n-nodes-knockknock",
+  "version": "1.0.0",
+  "description": "n8n community node for KnockKnock: scrape websites, extract structured JSON, capture screenshots, run SEO audits, and analyze sitemaps.",
+  "keywords": [
+    "n8n-community-node-package",
+    "n8n",
+    "knockknock",
+    "web-scraping",
+    "ai-extraction",
+    "screenshot",
+    "seo-audit",
+    "sitemap"
+  ],
+  "license": "MIT",
+  "homepage": "https://knockknock.hooxmedia.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganpatsherawat/n8n-nodes-knockknock.git"
+  },
+  "author": {
+    "name": "HooxMedia",
+    "email": "ask@email.hooxmedia.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && node -e \"const fs=require('fs');fs.mkdirSync('dist/nodes/KnockKnock',{recursive:true});fs.mkdirSync('dist/credentials',{recursive:true});fs.copyFileSync('nodes/KnockKnock/KnockKnock.node.json','dist/nodes/KnockKnock/KnockKnock.node.json');fs.copyFileSync('nodes/KnockKnock/knockknock.svg','dist/nodes/KnockKnock/knockknock.svg');fs.copyFileSync('nodes/KnockKnock/knockknock.svg','dist/credentials/knockknock.svg');\"",
+    "lint": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/KnockKnockApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/KnockKnock/KnockKnock.node.js"
+    ]
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.11",
+    "n8n-workflow": "^1.82.0",
+    "typescript": "^5.7.2"
+  }
+}

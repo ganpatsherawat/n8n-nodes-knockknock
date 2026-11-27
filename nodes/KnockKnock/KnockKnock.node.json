@@ -1,0 +1,30 @@
+{
+  "node": "n8n-nodes-knockknock.knockKnock",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Development", "Marketing & Content", "Utility"],
+  "alias": [
+    "scrape",
+    "extract",
+    "extraction",
+    "screenshot",
+    "screenshots",
+    "seo",
+    "audit",
+    "sitemap",
+    "search",
+    "markdown"
+  ],
+  "resources": {
+    "credentialDocumentation": [
+      {
+        "url": "https://knockknock.hooxmedia.com/dashboard"
+      }
+    ],
+    "primaryDocumentation": [
+      {
+        "url": "https://knockknock.hooxmedia.com/docs"
+      }
+    ]
+  }
+}
