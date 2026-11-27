@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-knockknock",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "n8n community node for KnockKnock: scrape websites, extract structured JSON, capture screenshots, run SEO audits, and analyze sitemaps.",
   "keywords": [
     "n8n-community-node-package",
@@ -20,7 +20,7 @@
   },
   "author": {
     "name": "ganpatsherawat",
-    "email": "support@hooxmedia.com"
+    "email": "ganpat@hooxmedia.com"
   },
   "main": "index.js",
   "scripts": {
