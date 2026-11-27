@@ -18,12 +18,17 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install -g npm@latest
+      - name: Stage A - Install npm 10.9.4 for scanner compatibility
+        run: npm install -g npm@10.9.4
       - run: npm ci --ignore-scripts
       - run: npm run lint
       - run: npm run build
       - run: npm test
-      - run: npx --yes @n8n/scan-community-package .
+      - run: npx --yes @n8n/scan-community-package@0.39.0 .
+      - name: Stage B - Upgrade to npm 11.5.1 for provenance publishing
+        run: |
+          npm install -g npm@11.5.1
+          npm --version
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
