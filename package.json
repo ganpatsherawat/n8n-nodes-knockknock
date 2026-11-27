@@ -19,7 +19,8 @@
     "url": "git+https://github.com/ganpatsherawat/n8n-nodes-knockknock.git"
   },
   "author": {
-    "name": "ganpatsherawat"
+    "name": "ganpatsherawat",
+    "email": "support@hooxmedia.com"
   },
   "main": "index.js",
   "scripts": {

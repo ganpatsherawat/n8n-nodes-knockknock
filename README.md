@@ -44,4 +44,4 @@ This node has `usableAsTool: true` enabled and can be attached directly to n8n *
 
 - **Documentation:** [GitHub README](https://github.com/ganpatsherawat/n8n-nodes-knockknock#readme)
 - **Authentication Guide:** [Authentication](https://github.com/ganpatsherawat/n8n-nodes-knockknock#authentication)
-- **Support:** [ask@email.hooxmedia.com](mailto:ask@email.hooxmedia.com)
+- **Support:** [support@hooxmedia.com](mailto:support@hooxmedia.com)
