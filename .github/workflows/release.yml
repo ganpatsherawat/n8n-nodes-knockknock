@@ -28,4 +28,18 @@ jobs:
         run: |
           npm install -g npm@11.5.1
           npm --version
-      - run: npm publish --provenance --access public
+      - name: Verify OIDC environment and npmrc
+        run: |
+          echo "ACTIONS_ID_TOKEN_REQUEST_URL: $([ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ] && echo PRESENT || echo MISSING)"
+          echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN: $([ -n "$ACTIONS_ID_TOKEN_REQUEST_TOKEN" ] && echo PRESENT || echo MISSING)"
+          if [ -z "$ACTIONS_ID_TOKEN_REQUEST_URL" ] || [ -z "$ACTIONS_ID_TOKEN_REQUEST_TOKEN" ]; then
+            echo "Missing OIDC environment variables"
+            exit 1
+          fi
+          for cfg in "$NPM_CONFIG_USERCONFIG" "$HOME/.npmrc"; do
+            if [ -n "$cfg" ] && [ -f "$cfg" ] && grep -qE '_authToken=\s*$' "$cfg"; then
+              echo "Empty _authToken found in $cfg"
+              exit 1
+            fi
+          done
+      - run: npm publish --provenance --access public --registry=https://registry.npmjs.org
