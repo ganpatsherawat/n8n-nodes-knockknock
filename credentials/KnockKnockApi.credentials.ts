@@ -10,7 +10,7 @@ export class KnockKnockApi implements ICredentialType {
 	name = 'knockKnockApi';
 	displayName = 'KnockKnock API';
 	icon: Icon = 'file:knockknock.png';
-	documentationUrl = 'https://knockknock.hooxmedia.com/dashboard';
+	documentationUrl = 'https://github.com/ganpatsherawat/n8n-nodes-knockknock#authentication';
 
 	properties: INodeProperties[] = [
 		{
