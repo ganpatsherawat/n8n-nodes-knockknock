@@ -4,11 +4,15 @@ Official n8n community node for **KnockKnock**: scrape websites, extract structu
 
 ## Installation
 
-In your n8n instance, go to **Settings -> Community Nodes -> Install** and enter:
+> **Note:** npm publication is currently pending.
+
+Once published to npm, install in your n8n instance via **Settings -> Community Nodes -> Install**:
 
 ```text
 n8n-nodes-knockknock
 ```
+
+For local/pre-release testing, build a tarball with `npm pack` and install it into `/home/node/.n8n/nodes`.
 
 ## Authentication
 

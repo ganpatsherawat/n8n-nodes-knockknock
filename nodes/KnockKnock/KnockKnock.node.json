@@ -18,12 +18,12 @@
   "resources": {
     "credentialDocumentation": [
       {
-        "url": "https://knockknock.hooxmedia.com/dashboard"
+        "url": "https://github.com/ganpatsherawat/n8n-nodes-knockknock#authentication"
       }
     ],
     "primaryDocumentation": [
       {
-        "url": "https://knockknock.hooxmedia.com/docs"
+        "url": "https://github.com/ganpatsherawat/n8n-nodes-knockknock#readme"
       }
     ]
   }
