@@ -37,7 +37,7 @@ test('KnockKnock Codex metadata includes required aliases and valid categories',
 test('KnockKnockApi credentials validate API key via /v1/auth/verify', () => {
 	const creds = new KnockKnockApi();
 	assert.equal(creds.name, 'knockKnockApi');
-	assert.equal(creds.icon, 'file:knockknock.svg');
+	assert.equal(creds.icon, 'file:knockknock.png');
 	assert.equal(creds.test.request.url, '/v1/auth/verify');
 	assert.equal(creds.test.request.method, 'GET');
 });

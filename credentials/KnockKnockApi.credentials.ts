@@ -9,7 +9,7 @@ import type {
 export class KnockKnockApi implements ICredentialType {
 	name = 'knockKnockApi';
 	displayName = 'KnockKnock API';
-	icon: Icon = 'file:knockknock.svg';
+	icon: Icon = 'file:knockknock.png';
 	documentationUrl = 'https://knockknock.hooxmedia.com/dashboard';
 
 	properties: INodeProperties[] = [

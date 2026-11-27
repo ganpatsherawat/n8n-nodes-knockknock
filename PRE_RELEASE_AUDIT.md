@@ -1,37 +1,39 @@
-# KnockKnock n8n Community Node: Pre-Release Technical Audit
+# KnockKnock n8n Community Node: Pre-Release Technical Audit (Phase 3)
 
-## 1. Original Scanner Findings
-- `@n8n/scan-community-package .` initially reported **25 source errors** and **1 dist error**:
-  - `KnockKnockApi.credentials.ts`: Missing `icon` property.
-  - `KnockKnock.node.json`: `"Marketing"` is not a valid category (must be `"Marketing & Content"`).
-  - `KnockKnock.node.ts`: String literal `'main'` instead of `NodeConnectionTypes.Main`, 7 operations without `resource` grouping, unsorted options, miscased `action` labels, trailing periods on descriptions, `limit` parameter defaults, and `this.helpers.httpRequest()` instead of `this.helpers.httpRequestWithAuthentication()`.
+## 1. GitHub Repository & Package Readiness
+- **GitHub Repository:** `https://github.com/ganpatsherawat/n8n-nodes-knockknock` (Public, initialized inside `n8n-nodes-knockknock/` only)
+- **`package.json` `repository`:** `git+https://github.com/ganpatsherawat/n8n-nodes-knockknock.git`
+- **Secret Scan:** Verified 0 API keys, `.env` files, or private worker code in `n8n-nodes-knockknock/`.
+- **Tarball (`npm pack`):** `n8n-nodes-knockknock-1.0.0.tgz` (9 files, 4.9 kB packed / 20.8 kB unpacked).
+- **Scanner (`npx @n8n/scan-community-package .`):** **PASSED** (0 source errors, 0 dist errors).
 
-## 2. Fixes Implemented
-- **Zero-Credit Credential Verification:** Added `GET /v1/auth/verify` in `knockknock-worker/src/index.js` (reusing existing auth, 0 credits consumed) and updated `KnockKnockApi.credentials.ts` `test.request` to use it.
-- **Credential Icon:** Added `icon: Icon = 'file:knockknock.svg'` to `KnockKnockApi.credentials.ts` and copied `knockknock.svg` to `credentials/` and `dist/credentials/`.
-- **Unified Node with 3 Resources:** Grouped operations under `Page` (`scrape`, `extract`, `screenshot`, `seo`), `Website` (`batch`, `map`), and `Search` (`search`).
-- **Scanner Compliance:** Switched to `NodeConnectionTypes.Main`, `"Marketing & Content"` category, alphabetized options, sentence-case `action` labels, removed trailing periods, updated `limit` defaults, and switched screenshot downloads to `httpRequestWithAuthentication()`.
+---
 
-## 3. Final Scanner Output (`npx @n8n/scan-community-package .`)
-- **Result:** **PASSED** (`✅ Package "n8n-nodes-knockknock@1.0.0" has passed the security checks that run before publishing`)
-- **Errors:** 0 source errors, 0 dist errors.
+## 2. Live 7-Operation Integration Test Results (`https://knockknock.hooxmedia.com`)
 
-## 4. Build, Lint, and Test Results
-- **`npm run lint` (`tsc --noEmit`):** Passed (0 errors)
-- **`npm run build`:** Passed
-- **`npm test` (`node --test test/*.test.mjs`):** 3/3 tests passed
+| Test / Operation | Endpoint | HTTP Status | Latency | Result |
+|---|---|---|---|---|
+| Invalid Auth | `POST /scrape` | `401` | 662 ms | Rejected (`success: false`) |
+| `scrape` | `POST /scrape` | `200` | 2,708 ms | Passed (`success`, `data`) |
+| `extract` | `POST /extract` | `200` | 3,464 ms | Passed (`success`, `extracted`) |
+| `batch` | `POST /batch/scrape` | `200` | 920 ms | Passed (`total: 1`, `successful: 1`) |
+| `map` | `POST /map` | `200` | 1,126 ms | Passed (`links`, `total`) |
+| `search` | `POST /search` | `200` | 2,431 ms | Passed (`query`, `total`) |
+| `screenshot` | `POST /screenshot` | `200` | 3,793 ms | Passed (`screenshots` PNG URLs) |
+| `seo` | `POST /seo` | `200` | 2,215 ms | Passed (`url`, `data`) |
 
-## 5. Remaining Blockers
-1. **Git Repository URL:** `d:\n8n site` is not a Git repository, so `"repository"` in `package.json` cannot be populated from a Git remote until a GitHub repository is initialized.
-2. **Worker Deployment:** `GET /v1/auth/verify` was added locally to `knockknock-worker/src/index.js` and has **not** been deployed to production yet.
-3. **Live Integration & Local n8n Install:** Live 7-operation tests and local installation on `https://n8n.hooxmedia.com` (`n8n 2.48.7`, `Node.js v26.13.0`) are pending your approval.
+---
 
-## 6. Exact Files Modified
-- `knockknock-worker/src/index.js`
-- `n8n-nodes-knockknock/package.json`
-- `n8n-nodes-knockknock/credentials/KnockKnockApi.credentials.ts`
-- `n8n-nodes-knockknock/credentials/knockknock.svg`
-- `n8n-nodes-knockknock/nodes/KnockKnock/KnockKnock.node.json`
-- `n8n-nodes-knockknock/nodes/KnockKnock/KnockKnock.node.ts`
-- `n8n-nodes-knockknock/test/knockknock.test.mjs`
-- `n8n-nodes-knockknock/PRE_RELEASE_AUDIT.md`
+## 3. n8n Installation & UI Verification (`https://n8n.hooxmedia.com`)
+- **Self-Hosted Runtime (`n8n-docker-n8n-1`):** `n8n 2.48.7` on `Node.js v26.13.0` (Oracle Cloud VPS).
+- **Package Installation:** Installed `n8n-nodes-knockknock-1.0.0.tgz` into `/home/node/.n8n/nodes` (`added 1 package in 2s`) and restarted `n8n-docker-n8n-1`.
+- **Node Picker & Codex Aliases:** Verified `"KnockKnock"`, `"screenshot"`, `"seo"`, `"scrape"`, and `"sitemap"` all surface **KnockKnock** in the n8n node picker.
+- **Resource Groups & Operations:** Verified all 3 resource groups (`Page`: 4 operations, `Search`: 1 operation, `Website`: 2 operations) render in the n8n UI.
+- **`N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE`:** Currently **not set** on `n8n-docker-n8n-1`. Set to `true` in `docker-compose.yml` if you want community nodes to be selectable inside n8n AI Agent nodes.
+
+---
+
+## 4. Remaining Blockers Before Production / npm Publish
+1. **Deploy `GET /v1/auth/verify`:** Added locally to `knockknock-worker/src/index.js`; not yet deployed to production.
+2. **npm Authentication:** `npm login` is required on this machine (or `NPM_TOKEN` in GitHub Actions) before publishing to npm.
+3. **Isolated n8n `2.48.7` Tarball Install & AI Agent Execution:** Pending isolated container test with `N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true`.
