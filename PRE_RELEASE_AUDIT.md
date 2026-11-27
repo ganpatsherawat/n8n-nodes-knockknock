@@ -2,7 +2,7 @@
 
 ## 1. npm Publication & Provenance
 - **Package:** `https://www.npmjs.com/package/n8n-nodes-knockknock`
-- **Version:** `1.0.1` (`latest` dist-tag)
+- **Version:** `1.0.2` (`latest` dist-tag, published via OIDC-only GitHub Actions Run `45997705695`)
 - **Provenance:** Active (*"Built and signed on GitHub Actions"*)
 - **Trusted Publisher (OIDC):** Configured on `https://www.npmjs.com/package/n8n-nodes-knockknock/access`:
   - Provider: `GitHub Actions`
