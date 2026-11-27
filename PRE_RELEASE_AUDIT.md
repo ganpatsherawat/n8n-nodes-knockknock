@@ -2,8 +2,9 @@
 
 ## 1. npm Publication & Provenance
 - **Package:** `https://www.npmjs.com/package/n8n-nodes-knockknock`
-- **Version:** `1.0.2` (`latest` dist-tag, published via OIDC-only GitHub Actions Run `45997705695`)
-- **Provenance:** Active (*"Built and signed on GitHub Actions"*)
+- **Version:** `1.0.4` (`latest` dist-tag, published via GitHub Actions Run `46007290571`, commit `a75dedd`)
+- **Provenance:** Active (`https://slsa.dev/provenance/v1`, `https://registry.npmjs.org/-/npm/v1/attestations/n8n-nodes-knockknock@1.0.4`)
+- **n8n Creator Portal (`1.0.6` Preflight):** Wrapped `knockknock.png` in self-contained `nodes/KnockKnock/knockknock.svg` (Base64 data URI) and updated `KnockKnock.node.ts` to `icon: 'file:knockknock.svg'`. `npx @n8n/scan-community-package@beta .` **PASSED** with **0 errors**. Ready for `v1.0.6` release.
 - **Trusted Publisher (OIDC):** Configured on `https://www.npmjs.com/package/n8n-nodes-knockknock/access`:
   - Provider: `GitHub Actions`
   - Owner: `ganpatsherawat`

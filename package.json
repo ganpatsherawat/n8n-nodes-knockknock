@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-knockknock",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "n8n community node for KnockKnock: scrape websites, extract structured JSON, capture screenshots, run SEO audits, and analyze sitemaps.",
   "keywords": [
     "n8n-community-node-package",
@@ -24,7 +24,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "tsc && node -e \"const fs=require('fs');fs.mkdirSync('dist/nodes/KnockKnock',{recursive:true});fs.mkdirSync('dist/credentials',{recursive:true});fs.copyFileSync('nodes/KnockKnock/KnockKnock.node.json','dist/nodes/KnockKnock/KnockKnock.node.json');fs.copyFileSync('nodes/KnockKnock/knockknock.png','dist/nodes/KnockKnock/knockknock.png');fs.copyFileSync('credentials/knockknock.png','dist/credentials/knockknock.png');\"",
+    "build": "tsc && node -e \"const fs=require('fs');fs.mkdirSync('dist/nodes/KnockKnock',{recursive:true});fs.mkdirSync('dist/credentials',{recursive:true});fs.copyFileSync('nodes/KnockKnock/KnockKnock.node.json','dist/nodes/KnockKnock/KnockKnock.node.json');fs.copyFileSync('nodes/KnockKnock/knockknock.svg','dist/nodes/KnockKnock/knockknock.svg');fs.copyFileSync('credentials/knockknock.png','dist/credentials/knockknock.png');\"",
     "lint": "tsc --noEmit",
     "test": "node --test test/*.test.mjs"
   },

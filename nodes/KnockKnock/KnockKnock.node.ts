@@ -22,7 +22,7 @@ export class KnockKnock implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'KnockKnock',
 		name: 'knockKnock',
-		icon: 'file:knockknock.png',
+		icon: 'file:knockknock.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
