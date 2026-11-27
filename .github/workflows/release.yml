@@ -24,10 +24,15 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npx --yes @n8n/scan-community-package@0.39.0 .
-      - name: Stage B - Upgrade to npm 11.5.1 for provenance publishing
+      - name: Stage B - Upgrade to npm 11.6.2 for provenance publishing
         run: |
-          npm install -g npm@11.5.1
-          npm --version
+          npm install -g npm@11.6.2
+          NPM_VER=$(npm --version)
+          echo "npm version: $NPM_VER"
+          if [ "$NPM_VER" != "11.6.2" ]; then
+            echo "Expected npm 11.6.2, got $NPM_VER"
+            exit 1
+          fi
       - name: Verify OIDC environment and npmrc
         run: |
           echo "ACTIONS_ID_TOKEN_REQUEST_URL: $([ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ] && echo PRESENT || echo MISSING)"
