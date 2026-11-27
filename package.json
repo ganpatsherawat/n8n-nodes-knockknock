@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-knockknock",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "n8n community node for KnockKnock: scrape websites, extract structured JSON, capture screenshots, run SEO audits, and analyze sitemaps.",
   "keywords": [
     "n8n-community-node-package",
