@@ -17,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
       - name: Stage A - Install npm 10.9.4 for scanner compatibility
         run: npm install -g npm@10.9.4
       - run: npm ci --ignore-scripts
@@ -33,7 +34,7 @@ jobs:
             echo "Expected npm 11.6.2, got $NPM_VER"
             exit 1
           fi
-      - name: Verify OIDC environment and npmrc
+      - name: Verify OIDC environment
         run: |
           echo "ACTIONS_ID_TOKEN_REQUEST_URL: $([ -n "$ACTIONS_ID_TOKEN_REQUEST_URL" ] && echo PRESENT || echo MISSING)"
           echo "ACTIONS_ID_TOKEN_REQUEST_TOKEN: $([ -n "$ACTIONS_ID_TOKEN_REQUEST_TOKEN" ] && echo PRESENT || echo MISSING)"
@@ -41,10 +42,6 @@ jobs:
             echo "Missing OIDC environment variables"
             exit 1
           fi
-          for cfg in "$NPM_CONFIG_USERCONFIG" "$HOME/.npmrc"; do
-            if [ -n "$cfg" ] && [ -f "$cfg" ] && grep -qE '_authToken=\s*$' "$cfg"; then
-              echo "Empty _authToken found in $cfg"
-              exit 1
-            fi
-          done
       - run: npm publish --provenance --access public --registry=https://registry.npmjs.org
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
